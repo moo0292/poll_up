@@ -1,0 +1,45 @@
+<div class="jumbotron custom-add-poll-jt">
+    <div class="container text-left add-poll-title">
+        <h2>Add Poll</h2>
+    </div>
+    <div class="add-question">
+        <h3 class="text-left add-poll-question">Question :</h3>
+        <input type="text" class="add-poll-tb" ng-model="pollQuestionAdd" />
+    </div>
+    <div ng-repeat="item in currentAddPoll">
+        <div class="add-option">
+            <h3 class="text-left add-poll-question">Option {{$index + 1}} :</h3>
+            <input type="text" class="add-poll-tb-two" ng-model="item.value" />
+        </div>
+    </div>
+
+    <div class="add-option">
+        <button class="btn btn-warning custom-button-add" ng-click="addOption()">Add Option</button>
+        <button class="btn btn-danger custom-button-add" ng-click="clearPoll()">Clear</button>
+        <button class="btn btn-success custom-button-add" ng-click="addPoll()">Submit</button>
+    </div>
+</div>
+
+<div ng-repeat="poll in allPoll">
+    <div class="jumbotron custom-add-poll-jt">
+        <div class="container text-left add-poll-title">
+            <h2>{{poll.name}}</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-left" ng-repeat="no in poll.allTitleValue">
+                <div class="clear-both">
+                    <input type="radio" name="radio" ng-model="selected" value={{$index}} class="float-left">
+                    <h3 class="float-left option-text">{{no}}</h3>
+                    <br>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- <canvas barchart data="chart" width="300" height="300"></canvas> -->
+                <canvas tc-chartjs-bar chart-data="poll.graph" chart-options="options" width="300" height="300"></canvas>
+            </div>
+        </div>
+        <div class="add-option">
+            <button class="btn btn-success custom-button-submit" ng-click="submitAnswer($index)">Submit</button>
+        </div>
+    </div>
+</div>
